@@ -89,6 +89,32 @@ const Wrapper = styled.div<{ $leftColumnWidth: string }>`
     }
 `;
 
+const welcome = () => (
+    <div className="p-2">
+        <p>
+        Welcome to Perry, this tour is available in English only.
+        </p>
+        <p>
+            To get a feel for what Perry can do, you can try the following:
+        </p>
+        <ol>
+            <li>Go to "Create Entity Object" (a tab opens to the right)</li>
+            <li>Select the "Currency" entity in the dropdown at the top of the tab</li>
+            <li>Name the currency and pick a code for it (for instance Dollar and USD)</li>
+            <li>Click "Submit" (a new event will be listed in the "Events" list in the sidebar on the left)</li>
+            <li>Click the "Explore Entities" in the sidebar (a tab opens to the right)</li>
+            <li>Here you can navigate all objects of all entities:</li>
+            <ol>
+                <li>Uncollapse "Filter Attributes" to pick associated entities</li>
+                <li>Attributes of the picked associated entities are displayed in the table at the bottom</li>
+                <li>Right click a table row to edit or delete an item</li>
+                <li>Editing or deleting items will render new events in the "Events" list in the sidebar</li>
+            </ol>
+        </ol>
+        <p>Thank you for trying Perry.</p>
+    </div>
+);
+
 type Props = {
     onLogout: () => void;
     userAvatar?: string;
@@ -121,7 +147,7 @@ const Layout = ({ userAvatar, onLogout, brandSource }: Props) => {
     const welcomeTab = {
         id: "welcome",
         title: createTabTitle(<Info />, t("Welcome")),
-        content: <div className="p-2">{t("Perry")}</div>,
+        content: welcome,
         closable: true,
         group: defaultGroup,
     };
