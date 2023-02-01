@@ -1,0 +1,17 @@
+[volatile]
+queue_size = 100
+topics = [
+    "sampleperry.dupe.fct.mutations.0"
+]
+
+[service]
+hostname = "0.0.0.0"
+port = 6000
+[service.metrics]
+hostname = "127.0.0.1"
+port = 9093
+
+[auth]
+disabled = true
+jwt_header = "jwt-payload"
+jwt_user_claim = "sub"

@@ -1,0 +1,5 @@
+name = "perry-demo"
+main = "src/index.js"
+compatibility_date = "2022-05-06"
+
+site = { bucket = "./build" }

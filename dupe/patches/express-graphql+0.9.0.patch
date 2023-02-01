@@ -1,0 +1,22 @@
+diff --git a/node_modules/express-graphql/parseBody.js b/node_modules/express-graphql/parseBody.js
+index db563c9..630861f 100644
+--- a/node_modules/express-graphql/parseBody.js
++++ b/node_modules/express-graphql/parseBody.js
+@@ -63,7 +63,7 @@ async function parseBody(req) {
+         /* eslint-disable no-empty */
+         try {
+           return JSON.parse(rawBody);
+-        } catch (error) {} // Do nothing
++        } catch (error) { } // Do nothing
+ 
+         /* eslint-enable no-empty */
+ 
+@@ -102,7 +102,7 @@ async function readBody(req, typeInfo) {
+   const contentEncoding = req.headers['content-encoding'];
+   const encoding = typeof contentEncoding === 'string' ? contentEncoding.toLowerCase() : 'identity';
+   const length = encoding === 'identity' ? req.headers['content-length'] : null;
+-  const limit = 100 * 1024; // 100kb
++  const limit = 10 * 1024 * 1024; // 10MB
+ 
+   const stream = decompressed(req, encoding); // Read body from stream.
+ 

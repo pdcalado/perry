@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package event_broker;
+
+// Event Broker manages consumption and production
+// of events.
+service EventBroker {
+  // Produce one or multiple events.
+  rpc Produce(ProduceRequest) returns (ProduceReply) {}
+
+  // Request for a topic's history of events.
+  rpc History(HistoryRequest) returns (stream Event) {}
+
+  // Request for consuming events.
+  rpc Consume(ConsumeRequest) returns (stream Event) {}
+}
+
+// Message representing an actual event.
+message Event {
+  // Timestamp of the event as Unix time.
+  // Filled in automatically when not set.
+  uint64 timestamp = 1;
+  // Topic of this event.
+  string topic = 2;
+  // Key for aggregating events within a topic
+  // (see http://kafka.apache.org/intro#intro_concepts_and_terms)
+  string key = 3;
+  // Arbitrary payload of the event.
+  bytes payload = 4;
+}
+
+// Request for producing an event.
+message ProduceRequest {
+  // List of events to produce
+  repeated Event events = 1;
+}
+
+// Reply after producing events.
+message ProduceReply {
+  // List of Event production results, in the same order as event
+  // in the ProduceRequest.
+  repeated ProduceResult results = 1;
+}
+
+// Successful Event production
+message ProduceSuccess {
+  // Produced timestamp
+  uint64 timestamp = 1;
+}
+
+// Event production result
+message ProduceResult {
+  // Either success with timestamp or error with message.
+  oneof inner {
+    // Successful response
+    ProduceSuccess ok = 1;
+    // Failure response
+    string error = 2;
+  }
+}
+
+// Event history request
+message HistoryRequest {
+  // Topic to get the history from
+  string topic = 1;
+  // Search criteria.
+  SearchCriteria criteria = 2;
+}
+
+// Simple search criteria for history requests
+message SearchCriteria {
+  // Limit the number of events returned.
+  uint32 limit = 1;
+  // Send the most recent first.
+  bool newest_first = 2;
+  // Filter by key (if unset, no filtering is done)
+  string key = 3;
+  // Starting offset, or timestamp or none.
+  oneof index {
+    // Backend event source (Kafka?) offset.
+    uint32 offset = 4;
+    // Timestamp to start streaming from.
+    uint64 timestamp = 5;
+  }
+}
+
+// Consume events request
+message ConsumeRequest {
+  // Pattern matching topics to consume.
+  string pattern = 1;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "perrydl",
+  "version": "0.1.0",
+  "description": "Perry Data Library",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/pdcalado/perry.git",
+    "directory": "perrydl"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "ajv": "^6.12.3",
+    "camelcase": "^6.0.0",
+    "snake-case": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.5",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
+  },
+  "license": "ISC"
+}

@@ -1,0 +1,51 @@
+(cors) {
+    @cors_preflight method OPTIONS
+    @cors header Origin perry-demo.fly.dev
+
+    handle @cors_preflight {
+        header Access-Control-Allow-Origin "perry-demo.fly.dev"
+         header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE"
+        header Access-Control-Allow-Headers "Content-Type,Authorization"
+        header Access-Control-Max-Age "3600"
+        respond "" 204
+    }
+
+    handle @cors {
+        header Access-Control-Allow-Origin "perry-demo.fly.dev"
+        header Access-Control-Expose-Headers "Link"
+    }
+}  
+
+{
+	order rate_limit before basicauth
+    order grpc_web before reverse_proxy
+}
+
+:8000 {
+    rate_limit {
+        zone static {
+            key static
+            events 200
+            window 1m
+        }
+    }
+
+    @options {
+        method OPTIONS
+    }
+
+    header {
+        Access-Control-Allow-Origin "https://perry-demo.pages.dev"
+        Access-Control-Allow-Credentials true
+        Access-Control-Allow-Methods *
+        Access-Control-Allow-Headers *
+        defer
+    }
+
+    reverse_proxy /models* 127.0.0.1:5001
+    reverse_proxy /graphql* 127.0.0.1:4001
+    reverse_proxy /bulk* 127.0.0.1:4001
+
+    grpc_web
+    reverse_proxy /event_broker* h2c://127.0.0.1:6000
+}

@@ -1,0 +1,31 @@
+[server]
+port = 4000
+retry = 30000
+[server.auth]
+enabled = false
+jwt_header = "jwt-payload"
+jwt_user_claim = "sub"
+
+[dupe]
+tenant = "sampleperry"
+models = "http://localhost:5000"
+backup_onexit = false
+
+[backup]
+sqlite3 = "/usr/bin/sqlite3"
+extension = ".sql"
+fail_on_restore = true
+url = "."
+region = "us-east-1"
+
+[events]
+url = "localhost:6000"
+topic = "sampleperry.dupe.fct.mutations.0"
+copy_headers = [
+  "x-request-id",
+  "x-forwarded-for",
+  "x-b3-traceid",
+  "x-b3-spanid",
+  "x-b3-parentspanid",
+  "jwt-payload"
+]

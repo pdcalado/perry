@@ -1,0 +1,43 @@
+{
+	"name": "Perry",
+	"image": "pdcalado/perry-sandbox:0.1.0",
+	"runArgs": [
+		// Use a non-root user.
+		//
+		// On Linux, this will prevent new files getting created as root, but you
+		// may need to update the USER_UID and USER_GID in .devcontainer/Dockerfile
+		// to match your user if not 1000.
+		//"-u", "node",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined",
+		// Mount user's SSH folder on /root/.ssh in the devcontainer
+		"-v",
+		"${env:HOME}${env:USERPROFILE}/.ssh:/home/node/.ssh:ro"
+	],
+	// Use 'settings' to set *default* container specific settings.json values on container create.
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"lldb.adapterType": "native",
+		"lldb.executable": "/usr/bin/lldb",
+		"lldb.verboseLogging": true
+	},
+	// Published ports
+	"appPort": [
+		"3000:3000",
+		"4000:4000",
+		"5000:5000"
+	],
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container.
+	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	"remoteUser": "node",
+	// Add the IDs of extensions you want installed when the container is created in the array below.
+	"extensions": [
+		"bungcip.better-toml",
+		"vadimcn.vscode-lldb",
+		"zxh404.vscode-proto3",
+		"joaompinto.vscode-graphviz"
+	]
+}

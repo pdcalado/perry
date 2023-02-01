@@ -1,0 +1,9 @@
+{
+    "domain": "demo-perry.eu.auth0.com",
+    "clientId": "53J57cpgOE7XvHyhli4c7Z7ZNbMbsh5T",
+    "audience": "https://perry-demo.fly.dev",
+    "dupe_url": "https://perry-demo.fly.dev/graphql",
+    "bulk_upload_url": "https://perry-demo.fly.dev/bulk",
+    "models_url": "https://perry-demo.fly.dev",
+    "event_broker_url": "https://perry-demo.fly.dev"
+}

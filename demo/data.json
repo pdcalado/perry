@@ -1,0 +1,446 @@
+{
+  "healthz": { "status": "ok" },
+  "models": [
+    {
+      "id": 1,
+      "rev": 1,
+      "created_at": 1673998915000,
+      "updated_at": 1673998915000,
+      "tenant": "sampleperry",
+      "entities": [
+        {
+          "id": 1,
+          "urn": "sampleperry:part",
+          "singular": "part",
+          "plural": "parts",
+          "name": "Auto Part",
+          "description": "An electric or mechanical auto part",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "label",
+              "name": "Label",
+              "description": "Unique label of the part",
+              "required": true,
+              "unique": true,
+              "type": "string"
+            },
+            {
+              "id": "description",
+              "name": "Description",
+              "description": "Description of the part",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "urn": "sampleperry:category",
+          "name": "Category of Auto Part",
+          "singular": "category",
+          "plural": "categories",
+          "description": "Category of auto parts",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the category",
+              "required": true,
+              "unique": true,
+              "type": "string"
+            },
+            {
+              "id": "description",
+              "name": "Description",
+              "description": "Description of the category",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "urn": "sampleperry:storage_site",
+          "singular": "storage_site",
+          "plural": "storage_sites",
+          "name": "Storage Site",
+          "description": "A storage site for stock",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the storage site",
+              "required": true,
+              "type": "string",
+              "unique": true
+            },
+            {
+              "id": "address",
+              "name": "Address",
+              "description": "Address of the storage site",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "urn": "sampleperry:stock_part_config",
+          "singular": "stock_part_config",
+          "plural": "stock_part_configs",
+          "name": "Stock Part Configuration",
+          "description": "Configuration for a stock part",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "minimum",
+              "name": "Minimum Stock",
+              "description": "Minimum parts that should be in stock",
+              "type": "integer"
+            }
+          ],
+          "unique_constraints": [
+            {
+              "attributes": [],
+              "relations": [
+                "sampleperry:site_has_stock_config",
+                "sampleperry:part_has_stock_config"
+              ]
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "urn": "sampleperry:stock_entry",
+          "singular": "stock_entry",
+          "plural": "stock_entries",
+          "name": "Stock Entry",
+          "description": "An entry in the stock with quantity of a part",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "quantity",
+              "name": "Quantity",
+              "description": "Amount of parts in stock",
+              "type": "integer"
+            }
+          ],
+          "unique_constraints": [
+            {
+              "attributes": [],
+              "relations": [
+                "sampleperry:site_has_stock_entry",
+                "sampleperry:part_has_stock_entry"
+              ]
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "urn": "sampleperry:manufacturer",
+          "singular": "manufacturer",
+          "plural": "manufacturers",
+          "name": "Manufacturer",
+          "description": "Person or company that produces goods to be sold",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the manufacturer",
+              "type": "string",
+              "required": true,
+              "unique": true
+            },
+            {
+              "id": "email",
+              "name": "Email",
+              "description": "Email address",
+              "type": "string",
+              "required": true
+            },
+            {
+              "id": "address",
+              "name": "Address",
+              "description": "Main address of the manufacturer",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "urn": "sampleperry:point_of_contact",
+          "singular": "point_of_contact",
+          "plural": "points_of_contact",
+          "name": "Point of Contact",
+          "description": "Person or department serving as focal point of information for an external entity",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the person or department",
+              "type": "string",
+              "required": true
+            },
+            {
+              "id": "email",
+              "name": "Email Address",
+              "description": "Email address of the POC",
+              "type": "string",
+              "required": true,
+              "unique": true
+            },
+            {
+              "id": "phone_number",
+              "name": "Phone Number",
+              "description": "Contact phone number",
+              "type": "string",
+              "required": true
+            },
+            {
+              "id": "title",
+              "name": "Title",
+              "description": "Business title of the person",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "urn": "sampleperry:part_composition",
+          "singular": "part_composition",
+          "plural": "part_compositions",
+          "name": "Composition",
+          "description": "A composition of parts frequently used together",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the composition of parts",
+              "type": "string",
+              "required": true,
+              "unique": true
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "urn": "sampleperry:quantized_part_composition",
+          "singular": "quantized_part_composition",
+          "plural": "quantized_parts_composition",
+          "name": "Quantized Part",
+          "description": "A quantity of a part in a composition",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "quantity",
+              "name": "Quantity",
+              "description": "Quantity of the part in the composition",
+              "type": "integer",
+              "required": true
+            }
+          ],
+          "unique_constraints": [
+            {
+              "attributes": [],
+              "relations": [
+                "sampleperry:part_quantity_in_composition",
+                "sampleperry:composition_has_parts"
+              ]
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "urn": "sampleperry:currency",
+          "singular": "currency",
+          "plural": "currencies",
+          "name": "Currency",
+          "description": "Monetary units in common use",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "name",
+              "name": "Name",
+              "description": "Name of the currency",
+              "type": "string",
+              "required": true,
+              "unique": true
+            },
+            {
+              "id": "code",
+              "name": "Code",
+              "description": "Currency code according to ISO 4217",
+              "type": "string",
+              "required": true,
+              "unique": true
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "urn": "sampleperry:price_offer",
+          "singular": "price_offer",
+          "plural": "price_offers",
+          "name": "Price Offer",
+          "description": "Price offer for an part",
+          "visibility": "Tenant",
+          "attributes": [
+            {
+              "id": "unit_price",
+              "name": "Unit Price",
+              "description": "Price of a single unit in this offer",
+              "type": "real",
+              "required": true
+            },
+            {
+              "id": "units",
+              "name": "Units",
+              "description": "Number of units sold in this offer",
+              "type": "real",
+              "required": true
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": 1,
+          "urn": "sampleperry:categorizedby",
+          "name": "Categorized By",
+          "description": "Relates parts with categories",
+          "attributes": [],
+          "visibility": "Tenant",
+          "origin": "sampleperry:part",
+          "destination": "sampleperry:category",
+          "cardinality": "ManyToMany"
+        },
+        {
+          "id": 2,
+          "urn": "sampleperry:part_has_stock_config",
+          "name": "Part Has Stock Config",
+          "description": "Relation between a part and its stock configuration",
+          "visibility": "Tenant",
+          "origin": "sampleperry:part",
+          "destination": "sampleperry:stock_part_config",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 3,
+          "urn": "sampleperry:site_has_stock_config",
+          "name": "Stock Config For Site",
+          "description": "Relation between stock configuration and the storage site",
+          "visibility": "Tenant",
+          "origin": "sampleperry:storage_site",
+          "destination": "sampleperry:stock_part_config",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 4,
+          "urn": "sampleperry:part_has_stock_entry",
+          "name": "Part Has Stock Entry",
+          "description": "Relation between part and stock entry",
+          "visibility": "Tenant",
+          "origin": "sampleperry:part",
+          "destination": "sampleperry:stock_entry",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 5,
+          "urn": "sampleperry:site_has_stock_entry",
+          "name": "Stock Entry Has Storage Site ",
+          "description": "Relation between storage site and stock entry",
+          "visibility": "Tenant",
+          "origin": "sampleperry:storage_site",
+          "destination": "sampleperry:stock_entry",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 6,
+          "urn": "sampleperry:site_has_poc",
+          "name": "Storage Site Has POCs",
+          "description": "Relation between storage site and points of contact",
+          "visibility": "Tenant",
+          "origin": "sampleperry:storage_site",
+          "destination": "sampleperry:point_of_contact",
+          "cardinality": "ManyToMany",
+          "attributes": []
+        },
+        {
+          "id": 7,
+          "urn": "sampleperry:manufacturer_has_poc",
+          "name": "Manufacturer Has POCs",
+          "description": "Relation between manufacturer and points of contact",
+          "visibility": "Tenant",
+          "origin": "sampleperry:manufacturer",
+          "destination": "sampleperry:point_of_contact",
+          "cardinality": "ManyToMany",
+          "attributes": []
+        },
+        {
+          "id": 8,
+          "urn": "sampleperry:part_has_manufacturer",
+          "name": "Part Has Manufacturer",
+          "description": "Relation between part and manufacturer",
+          "visibility": "Tenant",
+          "origin": "sampleperry:manufacturer",
+          "destination": "sampleperry:part",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 9,
+          "urn": "sampleperry:part_quantity_in_composition",
+          "name": "Part Quantity In Composition",
+          "description": "Relation between part and quantity in composition",
+          "visibility": "Tenant",
+          "origin": "sampleperry:part",
+          "destination": "sampleperry:quantized_part_composition",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 10,
+          "urn": "sampleperry:composition_has_parts",
+          "name": "Composition Has Parts",
+          "description": "Relation between composition and quantized part",
+          "visibility": "Tenant",
+          "origin": "sampleperry:part_composition",
+          "destination": "sampleperry:quantized_part_composition",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 11,
+          "urn": "sampleperry:part_has_price_offer",
+          "name": "Part Has Price Offer",
+          "description": "Relation between part and price offer",
+          "visibility": "Tenant",
+          "origin": "sampleperry:part",
+          "destination": "sampleperry:price_offer",
+          "cardinality": "OneToMany",
+          "attributes": []
+        },
+        {
+          "id": 12,
+          "urn": "sampleperry:offer_has_currency",
+          "name": "Price Offer Has Currency",
+          "description": "Relation between price offer and currency",
+          "visibility": "Tenant",
+          "origin": "sampleperry:currency",
+          "destination": "sampleperry:price_offer",
+          "cardinality": "OneToMany",
+          "attributes": []
+        }
+      ]
+    }
+  ]
+}

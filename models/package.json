@@ -1,0 +1,20 @@
+{
+  "name": "models",
+  "version": "1.0.0",
+  "description": "Mocked models API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "pkg -t linux ."
+  },
+  "bin": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.16.1",
+    "minimist": "^1.2.5",
+    "@pdcalado/perrydl-wasm": "0.1.0"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.8"
+  }
+}
