@@ -59,8 +59,8 @@ This project is not being actively maintained.
 # Demo
 
 Go to https://perry-demo.pages.dev and use the credentials:
-* user: demo@demoperry12345.perry
-* password: 1veryrandomPassword4perry
+* user: `demo@demoperry12345.perry`
+* password: `1veryrandomPassword4perry`
 
 The demo is fairly limited:
 - data resets every hour
