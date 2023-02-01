@@ -8,7 +8,7 @@ Perry was used as a testing site to explore entity relationship concepts.
 1. Create JSON schemas from the spec.
 1. Create SQL schemas from the spec.
 1. Create GraphQL schemas from the spec.
-1. Use a generic UI to create/read/updeate objects (folder [ui](ui/)).
+1. Use a generic UI to create/read/update objects (folder [ui](ui/)).
 
 Perry includes:
 * Models API to simply serve the spec mentioned above ([models](models/)).
